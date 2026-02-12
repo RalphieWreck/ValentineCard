@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Be My Valentine?</title>
+
+    <style>
+        :root {
+            --bg1: #0b1020;
+            --bg2: #130a1a;
+            --glass: rgba(255, 255, 255, .10);
+            --glass2: rgba(255, 255, 255, .06);
+            --stroke: rgba(255, 255, 255, .16);
+            --text: rgba(255, 255, 255, .92);
+            --sub: rgba(255, 255, 255, .68);
+            --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+            --radius: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            color: var(--text);
+            overflow: hidden;
+            background:
+                radial-gradient(1200px 700px at 10% 10%, rgba(255, 86, 170, .25), transparent 60%),
+                radial-gradient(900px 600px at 85% 25%, rgba(80, 180, 255, .25), transparent 60%),
+                radial-gradient(900px 700px at 50% 95%, rgba(124, 92, 255, .22), transparent 60%),
+                linear-gradient(180deg, var(--bg1), var(--bg2));
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .blob {
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 999px;
+            filter: blur(30px);
+            opacity: .65;
+            animation: drift 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .blob.one {
+            background: radial-gradient(circle at 30% 30%, rgba(255, 70, 160, .9), transparent 60%);
+            left: -140px;
+            top: -120px;
+        }
+
+        .blob.two {
+            background: radial-gradient(circle at 40% 35%, rgba(70, 170, 255, .9), transparent 60%);
+            right: -180px;
+            top: 40px;
+            animation-duration: 12s;
+        }
+
+        .blob.three {
+            background: radial-gradient(circle at 40% 40%, rgba(140, 90, 255, .9), transparent 60%);
+            left: 20%;
+            bottom: -240px;
+            animation-duration: 14s;
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(18px, -14px) scale(1.04);
+            }
+        }
+
+        .card {
+            width: min(560px, 100%);
+            border-radius: var(--radius);
+            background: linear-gradient(180deg, var(--glass), var(--glass2));
+            border: 1px solid var(--stroke);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px) saturate(140%);
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, .12), transparent 65%);
+            transform: rotate(12deg) translateX(-20%);
+            animation: sheen 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sheen {
+
+            0%,
+            100% {
+                transform: rotate(12deg) translateX(-22%);
+                opacity: .55;
+            }
+
+            50% {
+                transform: rotate(12deg) translateX(22%);
+                opacity: .9;
+            }
+        }
+
+        .top {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .heartBadge {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .14);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+
+        .heartBadge svg {
+            width: 24px;
+            height: 24px;
+            animation: pop 1.25s ease-in-out infinite;
+        }
+
+        @keyframes pop {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 0;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .sub {
+            margin: 6px 0 0;
+            font-size: 14px;
+            color: var(--sub);
+        }
+
+        .photo {
+            margin-top: 14px;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .06);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, .25);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .question {
+            margin: 16px 6px 6px;
+            font-size: 20px;
+        }
+
+        .arena {
+            position: relative;
+            height: 104px;
+            margin-top: 14px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .btn {
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(255, 255, 255, .10);
+            color: var(--text);
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+            backdrop-filter: blur(10px);
+            transition: transform .12s ease, background .15s ease;
+        }
+
+        .btnPrimary {
+            background: linear-gradient(180deg, rgba(120, 255, 205, .25), rgba(255, 255, 255, .10));
+        }
+
+        #noBtn {
+            position: absolute;
+            left: 58%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .success {
+            display: none;
+            margin-top: 14px;
+            border-radius: 22px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .05));
+            box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
+        }
+
+        .success.show {
+            display: block;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 10px;
+            border-radius: 2px;
+            opacity: .95;
+            left: 50%;
+            top: 20%;
+            pointer-events: none;
+            animation: fall 900ms ease-out forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(-50%, -20px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(calc(-50% + var(--dx)), calc(360px + var(--dy))) rotate(260deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+
+    <main class="card" id="card">
+
+        <div class="top">
+            <div class="heartBadge">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 21s-7.5-4.6-10-9.2C.2 8.1 2.4 4.6 6.1 4.6c1.9 0 3.3.9 3.9 1.8.6-.9 2-1.8 3.9-1.8 3.7 0 5.9 3.5 4.1 7.2C19.5 16.4 12 21 12 21z"
+                        fill="rgba(255,90,170,.95)" />
+                </svg>
+            </div>
+
+            <div>
+                <h1>Hey Erica, I just have one quick question…</h1>
+                <p class="sub">No pressure. Just meemoos. (okay maybe a little)</p>
+            </div>
+        </div>
+
+        <section class="photo">
+            <!-- FIXED HERE -->
+            <img src="photo1.jpg" alt="Our photo" />
+        </section>
+
+        <div class="question">
+            Will you be my Valentine? 💘
+        </div>
+
+        <section class="arena" id="arena">
+            <button class="btn btnPrimary" id="yesBtn">Yes ✨</button>
+            <button class="btn" id="noBtn">No 😈</button>
+        </section>
+
+        <section class="success" id="success">
+            <p><strong>Yesss!! 💖</strong></p>
+            <p>You’re officially my favorite person now.</p>
+        </section>
+
+    </main>
+
+    <script>
+        const arena = document.getElementById("arena");
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const success = document.getElementById("success");
+        const card = document.getElementById("card");
+
+        function moveNoButton() {
+            const a = arena.getBoundingClientRect();
+            const b = noBtn.getBoundingClientRect();
+
+            const maxX = a.width - b.width;
+            const maxY = a.height - b.height;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+            noBtn.style.transform = "translate(0,0)";
+        }
+
+        noBtn.addEventListener("mouseenter", moveNoButton);
+        noBtn.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            moveNoButton();
+        }, { passive: false });
+
+        yesBtn.addEventListener("click", () => {
+            success.classList.add("show");
+
+            for (let i = 0; i < 30; i++) {
+                const c = document.createElement("div");
+                c.className = "confetti";
+                c.style.background =
+                    `hsl(${Math.random() * 360},90%,70%)`;
+                c.style.setProperty("--dx", `${(Math.random() * 400) - 200}px`);
+                c.style.setProperty("--dy", `${(Math.random() * 200) - 100}px`);
+                c.style.left = `${10 + Math.random() * 80}%`;
+                c.style.top = `${10 + Math.random() * 20}%`;
+                card.appendChild(c);
+                c.addEventListener("animationend", () => c.remove());
+            }
+
+            noBtn.style.display = "none";
+            yesBtn.disabled = true;
+        });
+
+        moveNoButton();
+    </script>
+
+</body>
+
+</html>
